@@ -54,9 +54,11 @@ namespace MailerService
                     {
                         continue;
                     }
+                    mail.SendingDate = DateTime.Now;
                     MailSend(mail);
                     _logger.LogInformation("Mail Send at: {time}", DateTimeOffset.Now);
                     _logger.LogInformation("Mail Send To:" + mail.ReceiverId.ToString());
+                    
                     mail.Statues = true;
                     dbContext.EmailTrackers.Update(mail);
                     dbContext.SaveChanges();
